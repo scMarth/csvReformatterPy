@@ -77,7 +77,7 @@ def clearBuffer():
 
 # Process a byte
 def processByte(byte):
-    global waitingForEndQuote
+    global waitingForEndQuote, records, numColumns
     if (byte == ','):
         if (waitingForEndQuote != True):
             addBufferAsValue()
@@ -94,7 +94,8 @@ def processByte(byte):
         if (waitingForEndQuote):
             addByteToBuffer(byte)
         else:
-            addBufferAsValue()
+            if (len(records[len(records)-1]) == (numColumns - 1)): # this ignores newlines at the end of a CSV file
+                addBufferAsValue()
     else:
         addByteToBuffer(byte)
     return
@@ -152,7 +153,8 @@ createNewRecords()
 while True:
     byte = file.read(1)
     if not byte:
-        addBufferAsValue()
+        if (len(records[len(records)-1]) == (numColumns - 1)): # this ignores newlines at the end of a CSV file
+            addBufferAsValue()
         break
     else:
         processByte(byte)
