@@ -12,7 +12,7 @@ import datetime
 buffer = ""
 waitingForEndQuote = False
 maxBufferLen = 1000
-numColumns = 39 # SET NUMBER OF COLUMNS HERE
+numColumns = 3 # SET NUMBER OF COLUMNS HERE
 bufferIndex = 0
 records = None
 file = None
@@ -133,7 +133,7 @@ def dumpFormattedRecords():
         print("len(records[i-1]) = " + str(len(records[i-1])))
     return
 
-baseFilename = "./FILENAME" # SET FILENAME HERE
+baseFilename = "./test" # SET FILENAME HERE (without .csv file extension)
 fileExt = ".csv"
 filename = baseFilename + fileExt
 outfilename = baseFilename + "_formatted.txt"
